@@ -1,8 +1,9 @@
-import 'package:eshop/constants.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/splash/splash_screen.dart';
 import 'routes.dart';
+import 'theme.dart';
+
+import 'screens/splash/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,15 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'E-SHOP',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'Muli',
-        textTheme: TextTheme(
-          bodyText1: TextStyle(color: kTextColor),
-          bodyText2: TextStyle(color: kTextColor),
-        ),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: theme(),
       initialRoute: SplashScreen.routeName,
       routes: routes,
     );
