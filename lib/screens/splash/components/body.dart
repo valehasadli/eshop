@@ -66,9 +66,7 @@ class _BodyState extends State<Body> {
                         (index) => buildDot(index: index),
                       ),
                     ),
-                    Spacer(
-                      flex: 3,
-                    ),
+                    Spacer(flex: 3),
                     DefaultButton(
                       text: 'Continue',
                       press: () {},
