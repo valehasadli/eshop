@@ -5,6 +5,7 @@ import '../../../constants.dart';
 import '../../../components/custom_suffix_icon.dart';
 import '../../../components/form_error.dart';
 import '../../../components/default_button.dart';
+import '../../forgot_password/forgot_password_screen.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   String email;
   String password;
+  bool passwordShow = true;
   bool remember = false;
 
   final _formKey = GlobalKey<FormState>();
@@ -44,10 +46,15 @@ class _LoginFormState extends State<LoginForm> {
               ),
               Text('Remember me'),
               Spacer(),
-              Text(
-                'Forgot Password',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
+              FlatButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
+                },
+                child: Text(
+                  'Forgot Password',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
               ),
             ],
@@ -106,7 +113,7 @@ class _LoginFormState extends State<LoginForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
-      obscureText: true,
+      obscureText: passwordShow,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty && errors.contains(kPassNullError)) {
@@ -136,7 +143,16 @@ class _LoginFormState extends State<LoginForm> {
         labelText: 'Password',
         hintText: 'Enter your password',
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSuffixIcon(svgIcon: 'assets/icons/Lock.svg'),
+        suffixIcon: GestureDetector(
+          onTap: () {
+            setState(() {
+              passwordShow = !passwordShow;
+            });
+          },
+          child: CustomSuffixIcon(
+            svgIcon: 'assets/icons/Lock.svg',
+          ),
+        ),
       ),
     );
   }
