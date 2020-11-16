@@ -57,6 +57,7 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   String email;
   String password;
+  bool remember = false;
 
   final _formKey = GlobalKey<FormState>();
   final List<String> errors = [];
@@ -68,16 +69,31 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           buildEmailFormField(),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
+          SizedBox(height: getProportionateScreenHeight(20)),
           buildPasswordFormField(),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
+          SizedBox(height: getProportionateScreenHeight(20)),
           FormError(errors: errors),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
+          SizedBox(height: getProportionateScreenHeight(20)),
+          Row(
+            children: [
+              Checkbox(
+                activeColor: kPrimaryColor,
+                value: remember,
+                onChanged: (value) {
+                  setState(() {
+                    remember = value;
+                  });
+                },
+              ),
+              Text('Remember me'),
+              Spacer(),
+              Text(
+                'Forgot Password',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ],
           ),
           DefaultButton(
             text: 'Continue',
