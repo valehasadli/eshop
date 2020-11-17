@@ -6,12 +6,7 @@ import '../../../components/social_card.dart';
 import '../../../components/no_account_text.dart';
 import 'login_form.dart';
 
-class Body extends StatefulWidget {
-  @override
-  _BodyState createState() => _BodyState();
-}
-
-class _BodyState extends State<Body> {
+class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
