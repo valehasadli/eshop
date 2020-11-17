@@ -6,6 +6,7 @@ import '../../../components/custom_suffix_icon.dart';
 import '../../../components/form_error.dart';
 import '../../../components/default_button.dart';
 import '../../forgot_password/forgot_password_screen.dart';
+import '../../login_success/login_success_screen.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -64,6 +65,10 @@ class _LoginFormState extends State<LoginForm> {
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
+
+                if (errors.isEmpty) {
+                  Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                }
               }
             },
           ),
