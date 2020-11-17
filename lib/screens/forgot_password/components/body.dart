@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
+import '../../../components/no_account_text.dart';
 import 'forgot_password_form.dart';
 
 class Body extends StatefulWidget {
@@ -27,7 +28,7 @@ class _BodyState extends State<Body> {
                   'Forgot Password',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: getProportionateScreenWidth(25),
+                    fontSize: getProportionateScreenWidth(28),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -42,24 +43,7 @@ class _BodyState extends State<Body> {
                 SizedBox(height: SizeConfig.screenHeight * 0.1),
                 ForgotPasswordForm(),
                 SizedBox(height: SizeConfig.screenHeight * 0.2),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Don\'t have an account? ',
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(16),
-                      ),
-                    ),
-                    Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(16),
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  ],
-                ),
+                NoAccountText(),
               ],
             ),
           ),

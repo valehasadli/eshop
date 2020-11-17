@@ -46,8 +46,8 @@ class _LoginFormState extends State<LoginForm> {
               ),
               Text('Remember me'),
               Spacer(),
-              FlatButton(
-                onPressed: () {
+              GestureDetector(
+                onTap: () {
                   Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
                 },
                 child: Text(
