@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 
-import '../../../size_config.dart';
 import '../../../constants.dart';
-import '../../../components/custom_suffix_icon.dart';
+import '../../../size_config.dart';
 import '../../../components/form_error.dart';
 import '../../../components/default_button.dart';
-import '../../forgot_password/forgot_password_screen.dart';
-import '../../login_success/login_success_screen.dart';
+import '../../../components/custom_suffix_icon.dart';
 
-class LoginForm extends StatefulWidget {
+class RegistrationForm extends StatefulWidget {
   @override
-  _LoginFormState createState() => _LoginFormState();
+  _RegistrationFormState createState() => _RegistrationFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _RegistrationFormState extends State<RegistrationForm> {
   String email;
   String password;
+  String conformPassword;
   bool showPassword = true;
-  bool remember = false;
+
+  final List<String> errors = [];
 
   final _formKey = GlobalKey<FormState>();
-  final List<String> errors = [];
 
   void addError({@required String error}) {
     if (!errors.contains(error))
@@ -52,40 +51,16 @@ class _LoginFormState extends State<LoginForm> {
           SizedBox(height: getProportionateScreenHeight(30)),
           buildPasswordFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
+          buildConformPassFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(20)),
-          Row(
-            children: [
-              Checkbox(
-                activeColor: kPrimaryColor,
-                value: remember,
-                onChanged: (value) {
-                  setState(() {
-                    remember = value;
-                  });
-                },
-              ),
-              Text('Remember me'),
-              Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
-                },
-                child: Text(
-                  'Forgot Password',
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-            ],
-          ),
           DefaultButton(
             text: 'Continue',
             press: () {
               if (_formKey.currentState.validate() && errors.isEmpty) {
                 _formKey.currentState.save();
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                // redirect to somewhere
               }
             },
           ),
@@ -126,6 +101,41 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
+  TextFormField buildConformPassFormField() {
+    return TextFormField(
+      obscureText: showPassword,
+      onSaved: (newValue) => conformPassword = newValue,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          removeError(error: kPassNullError);
+        }
+        if (value.isNotEmpty && password == conformPassword) {
+          removeError(error: kMatchPassError);
+        }
+        conformPassword = value;
+      },
+      validator: (value) {
+        if (value.isEmpty) {
+          addError(error: kPassNullError);
+          return "";
+        } else if (password != value) {
+          addError(error: kMatchPassError);
+          return "";
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: "Confirm Password",
+        hintText: "Re-enter your password",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: GestureDetector(
+          onTap: () => toggleShowPassword(),
+          child: CustomSuffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        ),
+      ),
+    );
+  }
+
   TextFormField buildPasswordFormField() {
     return TextFormField(
       obscureText: showPassword,
@@ -137,7 +147,7 @@ class _LoginFormState extends State<LoginForm> {
         if (value.length >= 8) {
           removeError(error: kShortPassError);
         }
-        return null;
+        password = value;
       },
       validator: (value) {
         if (value.isEmpty) {
@@ -152,8 +162,6 @@ class _LoginFormState extends State<LoginForm> {
       decoration: InputDecoration(
         labelText: "Password",
         hintText: "Enter your password",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: GestureDetector(
           onTap: () => toggleShowPassword(),

@@ -4,7 +4,7 @@ import '../../../size_config.dart';
 import '../../../constants.dart';
 import '../../../components/custom_suffix_icon.dart';
 import '../../../components/default_button.dart';
-import 'form_error.dart';
+import '../../../components/form_error.dart';
 
 class ForgotPasswordForm extends StatefulWidget {
   @override

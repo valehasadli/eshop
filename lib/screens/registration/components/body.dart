@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
+import '../../../constants.dart';
 import '../../../components/social_card.dart';
-import '../../../components/no_account_text.dart';
-import 'login_form.dart';
+import 'registration_form.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -20,21 +20,17 @@ class Body extends StatelessWidget {
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04),
                 Text(
-                  'Welcome Back',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: getProportionateScreenWidth(28),
-                    fontWeight: FontWeight.bold,
-                  ),
+                  'Register Account',
+                  style: headingStyle,
                 ),
                 SizedBox(height: getProportionateScreenWidth(20)),
                 Text(
-                  'Sign in with your email and password or continue\n with social media',
+                  'Complete your details or continue \nwith social media',
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: SizeConfig.screenHeight * 0.08),
-                LoginForm(),
-                SizedBox(height: SizeConfig.screenHeight * 0.08),
+                SizedBox(height: SizeConfig.screenHeight * 0.04),
+                RegistrationForm(),
+                SizedBox(height: SizeConfig.screenHeight * 0.04),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -53,7 +49,11 @@ class Body extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: getProportionateScreenHeight(20)),
-                NoAccountText(),
+                Text(
+                  'By continuing your confirm that you agree \nwith our Term and Condition',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.caption,
+                ),
               ],
             ),
           ),
