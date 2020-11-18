@@ -63,12 +63,9 @@ class _LoginFormState extends State<LoginForm> {
           DefaultButton(
             text: 'Continue',
             press: () {
-              if (_formKey.currentState.validate()) {
+              if (_formKey.currentState.validate() && errors.isEmpty) {
                 _formKey.currentState.save();
-
-                // if (errors.isEmpty) {
-                //   Navigator.pushNamed(context, LoginSuccessScreen.routeName);
-                // }
+                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
               }
             },
           ),
