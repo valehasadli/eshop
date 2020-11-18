@@ -4,12 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../size_config.dart';
 
 class FormError extends StatelessWidget {
+  final List<String> errors;
+
   const FormError({
     Key key,
     @required this.errors,
   }) : super(key: key);
-
-  final List<String> errors;
 
   @override
   Widget build(BuildContext context) {
