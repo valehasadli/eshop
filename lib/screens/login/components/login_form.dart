@@ -16,7 +16,7 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   String email;
   String password;
-  bool passwordShow = true;
+  bool showPassword = true;
   bool remember = false;
 
   final _formKey = GlobalKey<FormState>();
@@ -34,6 +34,12 @@ class _LoginFormState extends State<LoginForm> {
       setState(() {
         errors.remove(error);
       });
+  }
+
+  void toggleShowPassword() {
+    setState(() {
+      showPassword = !showPassword;
+    });
   }
 
   @override
@@ -93,20 +99,19 @@ class _LoginFormState extends State<LoginForm> {
       keyboardType: TextInputType.emailAddress,
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kEmailNullError)) {
+        if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
-        } else if (emailValidatorRegExp.hasMatch(value) &&
-            errors.contains(kInvalidEmailError)) {
+        }
+        if (emailValidatorRegExp.hasMatch(value)) {
           removeError(error: kInvalidEmailError);
         }
         return null;
       },
       validator: (value) {
-        if (value.isEmpty && !errors.contains(kEmailNullError)) {
+        if (value.isEmpty) {
           addError(error: kEmailNullError);
           return "";
-        } else if (!emailValidatorRegExp.hasMatch(value) &&
-            !errors.contains(kInvalidEmailError)) {
+        } else if (!emailValidatorRegExp.hasMatch(value)) {
           addError(error: kInvalidEmailError);
           return "";
         }
@@ -123,39 +128,36 @@ class _LoginFormState extends State<LoginForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
-      obscureText: passwordShow,
+      obscureText: showPassword,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kPassNullError)) {
+        if (value.isNotEmpty) {
           removeError(error: kPassNullError);
-        } else if (value.length >= 8 && errors.contains(kShortPassError)) {
+        }
+        if (value.length >= 8) {
           removeError(error: kShortPassError);
         }
         return null;
       },
       validator: (value) {
-        if (value.isEmpty && !errors.contains(kPassNullError)) {
+        if (value.isEmpty) {
           addError(error: kPassNullError);
           return "";
-        } else if (value.length < 8 && !errors.contains(kShortPassError)) {
+        } else if (value.length < 8) {
           addError(error: kShortPassError);
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: 'Password',
-        hintText: 'Enter your password',
+        labelText: "Password",
+        hintText: "Enter your password",
+        // If  you are using latest version of flutter then lable text and hint text shown like this
+        // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: GestureDetector(
-          onTap: () {
-            setState(() {
-              passwordShow = !passwordShow;
-            });
-          },
-          child: CustomSuffixIcon(
-            svgIcon: 'assets/icons/Lock.svg',
-          ),
+          onTap: () => toggleShowPassword(),
+          child: CustomSuffixIcon(svgIcon: "assets/icons/Lock.svg"),
         ),
       ),
     );

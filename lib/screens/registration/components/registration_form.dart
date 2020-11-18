@@ -13,8 +13,9 @@ class RegistrationForm extends StatefulWidget {
 
 class _RegistrationFormState extends State<RegistrationForm> {
   String email;
-  String password, matchPassword;
-  bool passwordShow = true;
+  String password;
+  String conformPassword;
+  bool showPassword = true;
 
   final List<String> errors = [];
 
@@ -34,6 +35,12 @@ class _RegistrationFormState extends State<RegistrationForm> {
       });
   }
 
+  void toggleShowPassword() {
+    setState(() {
+      showPassword = !showPassword;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -44,7 +51,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
           SizedBox(height: getProportionateScreenHeight(30)),
           buildPasswordFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          buildMatchPasswordFormField(),
+          buildConformPassFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(20)),
@@ -53,7 +60,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
             press: () {
               if (_formKey.currentState.validate() && errors.isEmpty) {
                 _formKey.currentState.save();
-                print('done');
+                // redirect to somewhere
               }
             },
           ),
@@ -67,20 +74,19 @@ class _RegistrationFormState extends State<RegistrationForm> {
       keyboardType: TextInputType.emailAddress,
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kEmailNullError)) {
+        if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
-        } else if (emailValidatorRegExp.hasMatch(value) &&
-            errors.contains(kInvalidEmailError)) {
+        }
+        if (emailValidatorRegExp.hasMatch(value)) {
           removeError(error: kInvalidEmailError);
         }
         return null;
       },
       validator: (value) {
-        if (value.isEmpty && !errors.contains(kEmailNullError)) {
+        if (value.isEmpty) {
           addError(error: kEmailNullError);
           return "";
-        } else if (!emailValidatorRegExp.hasMatch(value) &&
-            !errors.contains(kInvalidEmailError)) {
+        } else if (!emailValidatorRegExp.hasMatch(value)) {
           addError(error: kInvalidEmailError);
           return "";
         }
@@ -95,90 +101,71 @@ class _RegistrationFormState extends State<RegistrationForm> {
     );
   }
 
-  TextFormField buildPasswordFormField() {
+  TextFormField buildConformPassFormField() {
     return TextFormField(
-      obscureText: passwordShow,
-      onSaved: (newValue) => password = newValue,
+      obscureText: showPassword,
+      onSaved: (newValue) => conformPassword = newValue,
       onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kPassNullError)) {
+        if (value.isNotEmpty) {
           removeError(error: kPassNullError);
-        } else if (value.length >= 8 && errors.contains(kShortPassError)) {
-          removeError(error: kShortPassError);
-        } else if (value == matchPassword) {
+        }
+        if (value.isNotEmpty && password == conformPassword) {
           removeError(error: kMatchPassError);
         }
-        return null;
+        conformPassword = value;
       },
       validator: (value) {
-        if (value.isEmpty && !errors.contains(kPassNullError)) {
+        if (value.isEmpty) {
           addError(error: kPassNullError);
           return "";
-        } else if (value.length < 8 && !errors.contains(kShortPassError)) {
-          addError(error: kShortPassError);
-          return "";
-        } else if (value != matchPassword) {
+        } else if (password != value) {
           addError(error: kMatchPassError);
+          return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: 'Password',
-        hintText: 'Enter your password',
+        labelText: "Confirm Password",
+        hintText: "Re-enter your password",
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: GestureDetector(
-          onTap: () {
-            setState(() {
-              passwordShow = !passwordShow;
-            });
-          },
-          child: CustomSuffixIcon(
-            svgIcon: 'assets/icons/Lock.svg',
-          ),
+          onTap: () => toggleShowPassword(),
+          child: CustomSuffixIcon(svgIcon: "assets/icons/Lock.svg"),
         ),
       ),
     );
   }
 
-  TextFormField buildMatchPasswordFormField() {
+  TextFormField buildPasswordFormField() {
     return TextFormField(
-      obscureText: passwordShow,
-      onSaved: (newValue) => matchPassword = newValue,
+      obscureText: showPassword,
+      onSaved: (newValue) => password = newValue,
       onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kPassNullError)) {
+        if (value.isNotEmpty) {
           removeError(error: kPassNullError);
-        } else if (value.length >= 8 && errors.contains(kShortPassError)) {
-          removeError(error: kShortPassError);
-        } else if (value == password) {
-          removeError(error: kMatchPassError);
         }
-        return null;
+        if (value.length >= 8) {
+          removeError(error: kShortPassError);
+        }
+        password = value;
       },
       validator: (value) {
-        if (value.isEmpty && !errors.contains(kPassNullError)) {
+        if (value.isEmpty) {
           addError(error: kPassNullError);
           return "";
-        } else if (value.length < 8 && !errors.contains(kShortPassError)) {
+        } else if (value.length < 8) {
           addError(error: kShortPassError);
-          return "";
-        } else if (value != password) {
-          addError(error: kMatchPassError);
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: 'Confirm Password',
-        hintText: 'Re-enter your password',
+        labelText: "Password",
+        hintText: "Enter your password",
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: GestureDetector(
-          onTap: () {
-            setState(() {
-              passwordShow = !passwordShow;
-            });
-          },
-          child: CustomSuffixIcon(
-            svgIcon: 'assets/icons/Lock.svg',
-          ),
+          onTap: () => toggleShowPassword(),
+          child: CustomSuffixIcon(svgIcon: "assets/icons/Lock.svg"),
         ),
       ),
     );

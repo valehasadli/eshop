@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
+import '../../../constants.dart';
 import '../../../components/social_card.dart';
 import 'registration_form.dart';
 
@@ -20,15 +21,11 @@ class Body extends StatelessWidget {
                 SizedBox(height: SizeConfig.screenHeight * 0.04),
                 Text(
                   'Register Account',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: getProportionateScreenWidth(28),
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: headingStyle,
                 ),
                 SizedBox(height: getProportionateScreenWidth(20)),
                 Text(
-                  'Complete your details or continue\n with social media',
+                  'Complete your details or continue \nwith social media',
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.04),
@@ -53,8 +50,9 @@ class Body extends StatelessWidget {
                 ),
                 SizedBox(height: getProportionateScreenHeight(20)),
                 Text(
-                  'By continuing your confirm that you agree\n with our Term and Condition',
+                  'By continuing your confirm that you agree \nwith our Term and Condition',
                   textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.caption,
                 ),
               ],
             ),
