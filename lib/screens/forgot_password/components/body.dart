@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
 import '../../../size_config.dart';
 import '../../../components/no_account_text.dart';
 import 'forgot_password_form.dart';
