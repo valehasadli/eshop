@@ -5,6 +5,7 @@ import '../../../size_config.dart';
 import '../../../components/form_error.dart';
 import '../../../components/default_button.dart';
 import '../../../components/custom_suffix_icon.dart';
+import '../../complete_profile/complete_profile_screen.dart';
 
 class RegistrationForm extends StatefulWidget {
   @override
@@ -60,7 +61,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
             press: () {
               if (_formKey.currentState.validate() && errors.isEmpty) {
                 _formKey.currentState.save();
-                // redirect to somewhere
+                Navigator.pushNamed(context, CompleteProfileScreen.routeName);
               }
             },
           ),
