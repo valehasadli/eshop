@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
 import '../../../constants.dart';
-import '../../../components/social_card.dart';
 import '../../../components/term_and_condition_text.dart';
-import 'registration_form.dart';
+import 'complete_profile_form.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -21,7 +20,7 @@ class Body extends StatelessWidget {
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04),
                 Text(
-                  'Register Account',
+                  'Complete Profile',
                   style: headingStyle,
                 ),
                 SizedBox(height: getProportionateScreenWidth(20)),
@@ -30,26 +29,8 @@ class Body extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.04),
-                RegistrationForm(),
+                CompleteProfileForm(),
                 SizedBox(height: SizeConfig.screenHeight * 0.04),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SocialCard(
-                      icon: 'assets/icons/google-icon.svg',
-                      press: () {},
-                    ),
-                    SocialCard(
-                      icon: 'assets/icons/facebook-2.svg',
-                      press: () {},
-                    ),
-                    SocialCard(
-                      icon: 'assets/icons/twitter.svg',
-                      press: () {},
-                    ),
-                  ],
-                ),
-                SizedBox(height: getProportionateScreenHeight(20)),
                 TermAndConditionText(),
               ],
             ),
