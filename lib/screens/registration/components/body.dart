@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../size_config.dart';
 import '../../../constants.dart';
 import '../../../components/social_card.dart';
+import '../../../components/term_and_condition_text.dart';
 import 'registration_form.dart';
 
 class Body extends StatelessWidget {
@@ -49,11 +50,7 @@ class Body extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: getProportionateScreenHeight(20)),
-                Text(
-                  'By continuing your confirm that you agree \nwith our Term and Condition',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.caption,
-                ),
+                TermAndConditionText(),
               ],
             ),
           ),
