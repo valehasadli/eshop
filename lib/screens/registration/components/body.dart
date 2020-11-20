@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
                   'Register Account',
                   style: headingStyle,
                 ),
-                SizedBox(height: getProportionateScreenWidth(20)),
+                SizedBox(height: getProportionateScreenWidth(10)),
                 Text(
                   'Complete your details or continue \nwith social media',
                   textAlign: TextAlign.center,

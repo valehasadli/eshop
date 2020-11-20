@@ -27,7 +27,7 @@ class Body extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: getProportionateScreenWidth(20)),
+                SizedBox(height: getProportionateScreenWidth(10)),
                 Text(
                   'Sign in with your email and password or continue\n with social media',
                   textAlign: TextAlign.center,
