@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
 import '../../size_config.dart';
 
 import 'components/body.dart';
@@ -13,9 +12,6 @@ class HomeScreen extends StatelessWidget {
     SizeConfig().init(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Screen'),
-      ),
       body: Body(),
     );
   }
