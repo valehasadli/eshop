@@ -18,7 +18,8 @@ class DiscountBanner extends StatelessWidget {
         color: Color(0xFF4A3289),
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Text.rich(TextSpan(
+      child: Text.rich(
+        TextSpan(
           text: 'A Summer Surprise\n',
           style: TextStyle(color: Colors.white),
           children: [
@@ -29,7 +30,9 @@ class DiscountBanner extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-          ])),
+          ],
+        ),
+      ),
     );
   }
 }
