@@ -5,6 +5,7 @@ import 'home_header.dart';
 import 'discount_banner.dart';
 import 'categories.dart';
 import 'special_offers.dart';
+import 'popular_products.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -21,6 +22,9 @@ class Body extends StatelessWidget {
             Categories(),
             SizedBox(height: getProportionateScreenWidth(30)),
             SpecialOffers(),
+            SizedBox(height: getProportionateScreenWidth(30)),
+            PopularProducts(),
+            SizedBox(height: getProportionateScreenWidth(30)),
           ],
         ),
       ),
