@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
-import '../../../constants.dart';
+import 'home_header.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -10,40 +10,9 @@ class Body extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20),
-              ),
-              child: Row(
-                children: [
-                  buildSearch(),
-                ],
-              ),
-            ),
+            SizedBox(height: getProportionateScreenWidth(20)),
+            HomeHeader(),
           ],
-        ),
-      ),
-    );
-  }
-
-  Container buildSearch() {
-    return Container(
-      width: SizeConfig.screenWidth * 0.6,
-      decoration: BoxDecoration(
-        color: kSecondaryColor.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: TextField(
-        onChanged: (String value) {},
-        decoration: InputDecoration(
-          enabledBorder: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          hintText: 'Search Product',
-          prefixIcon: Icon(Icons.search),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(20),
-            vertical: getProportionateScreenWidth(9),
-          ),
         ),
       ),
     );
