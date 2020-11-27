@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../size_config.dart';
-import '../../constants.dart';
-import 'components/body.dart';
 import '../../models/product_model.dart';
-import '../../components/rounded_icon_button.dart';
+import 'components/body.dart';
+import 'components/custom_app_bar.dart';
 
 class DetailsScreen extends StatelessWidget {
   static const String routeName = '/details';
@@ -12,17 +12,13 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    final ProductDetailsArguments arguments =
+        ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       backgroundColor: Color(0xFFF5F6F9),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: RoundedIconButton(
-          iconData: Icons.arrow_back_ios,
-          press: () => Navigator.pop(context),
-        ),
-      ),
-      // body: Body(),
+      appBar: CustomAppBar(rating: arguments.product.rating),
+      body: Body(),
     );
   }
 }
