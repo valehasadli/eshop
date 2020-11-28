@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../size_config.dart';
-import '../../constants.dart';
 import '../../models/cart_model.dart';
 
 import 'components/body.dart';
