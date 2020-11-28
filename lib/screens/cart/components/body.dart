@@ -20,7 +20,9 @@ class _BodyState extends State<Body> {
       child: ListView.builder(
         itemCount: demoCarts.length,
         itemBuilder: (context, index) => Padding(
-          padding: EdgeInsets.symmetric(vertical: 10),
+          padding: EdgeInsets.symmetric(
+            vertical: getProportionateScreenWidth(10),
+          ),
           child: Dismissible(
             key: Key(demoCarts[index].product.id.toString()),
             direction: DismissDirection.endToStart,
@@ -30,10 +32,14 @@ class _BodyState extends State<Body> {
               });
             },
             background: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20),
+              ),
               decoration: BoxDecoration(
                 color: Color(0xFFFFE6E6),
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(
+                  getProportionateScreenWidth(15),
+                ),
               ),
               child: Row(
                 children: [
